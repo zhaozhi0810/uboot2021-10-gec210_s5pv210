@@ -669,6 +669,17 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
 						maxsize, (u_char *)addr,
 						WITH_DROP_FFS | WITH_WR_VERIFY);
 #endif
+#ifdef CONFIG_CMD_NAND_YAFFS
+                } else if (!strcmp(s, ".yaffs2")) {
+                    if (read) {
+                        printf("Unknown nand command suffix ‘%s‘.\n", s);
+                        return 1;
+                    }
+                    ret = nand_write_skip_bad(mtd, off, &rwsize,NULL,//这里参数和老版比要修改下
+                                maxsize,(u_char *)addr,
+                                WITH_YAFFS_OOB);
+#endif
+
 		} else if (!strcmp(s, ".oob")) {
 			/* out-of-band data */
 			mtd_oob_ops_t ops = {
@@ -846,6 +857,12 @@ static char nand_help_text[] =
 	"    'addr', skipping bad blocks and dropping any pages at the end\n"
 	"    of eraseblocks that contain only 0xFF\n"
 #endif
+#ifdef CONFIG_CMD_NAND_YAFFS
+        "nand write.yaffs2 - addr off|partition size\n"
+        "    write ‘size‘ bytes starting at offset ‘off‘ with yaffs format\n"
+        "    from memory address ‘addr‘, skipping bad blocks.\n"
+#endif
+
 	"nand erase[.spread] [clean] off size - erase 'size' bytes "
 	"from offset 'off'\n"
 	"    With '.spread', erase enough for given file size, otherwise,\n"

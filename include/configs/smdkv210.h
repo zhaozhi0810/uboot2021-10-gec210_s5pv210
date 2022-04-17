@@ -108,7 +108,11 @@
 
 
 
-#define CONFIG_BOOTCOMMAND "tftp 0x30008000 uImage ;bootm 0x30008000"
+//#define CONFIG_BOOTCOMMAND "tftp 0x30008000 uImage ;bootm 0x30008000"
+#define CONFIG_BOOTCOMMAND "nand read  0x30008000 180000 500000 ;nand read  0x31008000 100000 80000 ; bootz 30008000 - 31008000"
+//#define CONFIG_BOOTCOMMAND "tftp 0x30008000 uImage ;bootm 0x30008000"
+
+
 //#define CONFIG_BOOTARGS "console=ttySAC0,115200n8 root=/dev/nfs nfsroot=192.168.1.10:/home/hqyj/hq6818/system/rootfs rw ip=192.168.1.50 rw root wait ignore_loglevel earlyprintk"
 
 

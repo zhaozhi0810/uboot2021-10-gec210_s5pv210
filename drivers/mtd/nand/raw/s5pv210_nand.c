@@ -273,7 +273,7 @@ int board_nand_init(struct nand_chip *nand)
 	nand->ecc.mode = NAND_ECC_SOFT;
 #endif
 
-#ifdef CONFIG_S3C2410_NAND_BBT
+#ifdef CONFIG_SYS_NAND_USE_FLASH_BBT
 	nand->bbt_options |= NAND_BBT_USE_FLASH;
 #endif
 
@@ -281,5 +281,13 @@ int board_nand_init(struct nand_chip *nand)
 	
 	return 0;
 }
+
+
+
+
+
+
+
+
 
 
